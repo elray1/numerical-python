@@ -1,6 +1,7 @@
 \documentclass[]{article}
 
 \usepackage{amsmath}
+\usepackage[margin=1.5cm]{geometry}
 
 %opening
 \title{Example problem Ch 5}
@@ -43,14 +44,14 @@ seasonality around that trend. Specifically, if we use $y_t$ to denote food
 expenditures at time $t$, we have:
 
 \begin{equation*}
-y_t \approx \alpha_0 + \alpha_1 t + \sum_{k = 1}^K \{\gamma_{k} \sin\left( \frac{2 \pi k}{12} t \right) + \gamma^*_{k} \cos\left( \frac{2 \pi k}{12} t \right) \}
+y_t \approx \alpha_0 + \alpha_1 t + \sum_{k = 1}^K \{\gamma_{k} \sin\left( 2 \pi k t \right) + \gamma^*_{k} \cos\left( 2 \pi k t \right) \}
 \end{equation*}
 
 We will use $K = 6$ trigonometric terms.  We will explore
 using sums of trigonometric terms like this more later in the course when we discuss
 Fourier series.  For now, let's just note that the first terms in this sum have $k = 1$,
-which means those terms have period 12 months, which is reasonable for capturing
-seasonality with a period of 12 months.
+which means those terms have period 1 year, which is reasonable for capturing
+seasonality with a period of 1 year.
 
 We can express this model in matrix form as $y \approx X \beta$, where for the data from
 2004 through 2015, we have:
@@ -58,16 +59,16 @@ We can express this model in matrix form as $y \approx X \beta$, where for the d
 \begin{align*}
 y &= \begin{bmatrix} y_1 \\ \vdots \\ y_t \end{bmatrix} \\
 X &= \begin{bmatrix}
-1 & 2004 & \sin\left( \frac{2 \pi}{12} 2004 \right) & \cos\left( \frac{2 \pi}{12} 2004 \right) & \cdots & \sin\left( \frac{2 \pi 6}{12} 2004 \right) & \cos\left( \frac{2 \pi 6}{12} 2004 \right) \\
-1 & 2004.083 & \sin\left( \frac{2 \pi}{12} 2004.083 \right) & \cos\left( \frac{2 \pi}{12} 2004.083 \right) & \cdots & \sin\left( \frac{2 \pi 6}{12} 2004.083 \right) & \cos\left( \frac{2 \pi 6}{12} 2004.083 \right) \\
+1 & 2004 & \sin\left( 2 \pi \cdot 1 \cdot 2004 \right) & \cos\left( 2 \pi \cdot 1 \cdot 2004 \right) & \cdots & \sin\left( 2 \pi \cdot 6 \cdot 2004 \right) & \cos\left( 2 \pi \cdot 6 \cdot 2004 \right) \\
+1 & 2004.083 & \sin\left( 2 \pi \cdot 1 \cdot 2004.083 \right) & \cos\left( 2 \pi \cdot 1 \cdot 2004.083 \right) & \cdots & \sin\left( 2 \pi \cdot 6 \cdot 2004.083 \right) & \cos\left( 2 \pi \cdot 6 \cdot 2004.083 \right) \\
 \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
-1 & 2015.917 & \sin\left( \frac{2 \pi}{12} 2015.917 \right) & \cos\left( \frac{2 \pi}{12} 2015.917 \right) & \cdots & \sin\left( \frac{2 \pi 6}{12} 2015.917 \right) & \cos\left( \frac{2 \pi 6}{12} 2015.917 \right) \\
+1 & 2015.917 & \sin\left( 2 \pi \cdot 1 \cdot 2015.917 \right) & \cos\left( 2 \pi \cdot 1 \cdot 2015.917 \right) & \cdots & \sin\left( 2 \pi \cdot 6 \cdot 2015.917 \right) & \cos\left( 2 \pi \cdot 6 \cdot 2015.917 \right) \\
 \end{bmatrix} \\
 \beta &= \begin{bmatrix} \alpha_0 \\ \alpha_1 \\ \gamma_1 \\ \gamma^*_1 \\ \vdots \\ \gamma_6 \\ \gamma^*_6 \end{bmatrix}
 \end{align*}
 
 
-In python, create the matrix $X$ using the data from 2004 up through 2015.
+In python, create the matrix $X$ using the data from 2004 up through 2015.  For each column of X, create a plot showing the values in that column on the vertical axis and the corresponding values of t on the horizontal axis.  Do your results make sense?
 
 3. Find the least squares estimate of $\beta$.
 
